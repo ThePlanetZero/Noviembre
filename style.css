@@ -1,0 +1,248 @@
+@font-face {
+  font-family: "Alofon";
+  src: url("glf-alofon.semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --fondo: #ff7a00;
+  --fondo-claro: #ffa01f;
+  --crema: #fff6dc;
+  --rojo: #e8350c;
+  --tinta: #3a1000;
+  --noticias: #b3004b;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--fondo-claro) 0%, var(--fondo) 100%);
+  background-attachment: fixed;
+  color: var(--tinta);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- Banner ---------- */
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  pointer-events: none;
+}
+
+.banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.4) saturate(1.6) hue-rotate(-12deg);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+.banner-texto {
+  position: absolute;
+  top: 42%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.banner h1 {
+  margin: 0;
+  font-family: "Alofon", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 10vw, 6rem);
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: var(--crema);
+  text-shadow: 0 3px 0 var(--rojo), 0 6px 16px rgba(58, 16, 0, 0.5);
+}
+
+.banner .sub {
+  margin: 4px 0 0;
+  font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  color: var(--crema);
+  text-shadow: 0 2px 0 var(--rojo), 0 3px 8px rgba(58, 16, 0, 0.4);
+}
+
+/* ---------- Contenido ---------- */
+.contenido {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 330px 20px 40px;
+}
+
+/* ---------- Countdown ---------- */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: clamp(16px, 5vw, 48px);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.countdown .unidad span {
+  display: block;
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: bold;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--crema);
+  text-shadow: 0 2px 0 var(--rojo);
+}
+
+.countdown .unidad small {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--tinta);
+}
+
+.countdown-final {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--crema);
+  text-shadow: 0 2px 0 var(--rojo);
+  margin-bottom: 40px;
+}
+
+/* ---------- Scroller de noticias ---------- */
+.noticias {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.noticias-pista {
+  display: inline-block;
+  animation: scroll 25s linear infinite;
+}
+
+.noticias-pista span {
+  display: inline-block;
+  padding-right: 3rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: var(--tinta);
+}
+
+.noticias-pista span b {
+  color: var(--noticias);
+  margin-right: 0.6rem;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .noticias-pista { animation-duration: 90s; }
+}
+
+/* ---------- Reproductor ---------- */
+.musica {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.musica button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 120px; /* separación entre los iconos y el botón de música */
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.musica button:hover  { transform: scale(1.06); }
+.musica button:active { transform: scale(0.96); }
+
+.musica button img {
+  display: block;
+  width: 120px;
+  max-width: 40vw;
+  height: auto;
+}
+
+.musica button.sonando img {
+  animation: pulso 1.2s ease-in-out infinite;
+}
+
+@keyframes pulso {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.07); }
+}
+
+/* reserva su espacio pero no se ve hasta el primer clic */
+#nombre-cancion {
+  min-height: 1.6em;
+  margin: 10px 0 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: var(--tinta);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#nombre-cancion.visible { opacity: 1; }
+
+/* ---------- Mantente actualizado ---------- */
+.actualizado {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.actualizado h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  letter-spacing: 0.1em;
+  color: var(--crema);
+  text-shadow: 0 2px 0 var(--rojo);
+}
+
+.redes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.redes a {
+  display: block;
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  transition: transform 0.15s ease;
+}
+
+.redes a:hover  { transform: scale(1.1); }
+.redes a:active { transform: scale(0.95); }
+
+.redes a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
